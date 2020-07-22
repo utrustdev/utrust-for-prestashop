@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>UTRUST</name>
+	<displayName><![CDATA[UTRUST]]></displayName>
+	<version><![CDATA[1.0.0]]></version>
+	<description><![CDATA[Paiement en cryptomonnaies]]></description>
+	<author><![CDATA[Utrust]]></author>
+	<tab><![CDATA[payments_gateways]]></tab>
+	<confirmUninstall><![CDATA[]]></confirmUninstall>
+	<is_configurable>1</is_configurable>
+	<need_instance>1</need_instance>
+</module>
