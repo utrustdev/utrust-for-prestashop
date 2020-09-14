@@ -44,7 +44,7 @@ class UTRUST extends PaymentModule
     {
         $this->name = 'UTRUST';
         $this->tab = 'payments_gateways';
-        $this->version = '1.0.0';
+        $this->version = '1.1.0';
         $this->author = 'Utrust Team';
         $this->need_instance = 1;
 
