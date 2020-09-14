@@ -195,7 +195,7 @@ class UTRUSTRedirectModuleFrontController extends ModuleFrontController
             'city' => $address->city,
             'state' => '',
             'postcode' => $address->postcode,
-            'country' => $address->country,
+            'country' => Country::getIsoById($address->id_country),
         );
 
         $request = array(

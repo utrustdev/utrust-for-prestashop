@@ -69,7 +69,7 @@ In both cases, our team will be happy to help :purple_heart:.
 
 ## Contribute
 
-This plugin was initially written by a third-party contractor ([Bluejour](https://www.bleujour.com/)/[Infopolis](https://www.infopolis.fr/)), and is now maintained by the Utrust development team.
+This plugin was initially written by a third-party contractor ([Bleujour](https://www.bleujour.com/)/[Infopolis](https://www.infopolis.fr/)), and is now maintained by the Utrust development team.
 
 We have now opened it to the world so that the community using this plugin may have the chance of shaping its development.
 
