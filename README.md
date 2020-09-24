@@ -4,9 +4,9 @@
 
 **Demo Store:** https://prestashop.store.utrust.com/
 
-Accept Bitcoin, Ethereum, Utrust Token and other cryptocurrencies directly on your store with the Utrust payment gateway for WooCommerce.
+Accept Bitcoin, Ethereum, Utrust Token and other cryptocurrencies directly on your store with the Utrust payment gateway for PrestaShop.
 Utrust is cryptocurrency agnostic and provides fiat settlements.
-The Utrust plugin extends WooCommerce allowing you to take cryptocurrency payments directly on your store via the Utrust API.
+The Utrust plugin extends PrestaShop allowing you to take cryptocurrency payments directly on your store via the Utrust API.
 Find out more about Utrust at [utrust.com](https://utrust.com).
 
 ## Requirements
