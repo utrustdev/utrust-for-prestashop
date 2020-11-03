@@ -146,6 +146,7 @@ class UTRUSTRedirectModuleFrontController extends ModuleFrontController
         $order_items = $order->getProducts(true);
         $shipping_total = null;
         $tax_total = null;
+        $currency = new Currency($order->id_currency);
 
         // Line items
         foreach ($order_items as $product) {
@@ -154,7 +155,7 @@ class UTRUSTRedirectModuleFrontController extends ModuleFrontController
                 'sku' => $product['id_product'] . '-' . $product['id_product_attribute'],
                 'name' => $product['name'] . ' - ' . $product['attributes_small'],
                 'price' => strval($product['price']),
-                'currency' => 'EUR',
+                'currency' => $currency->iso_code,
                 'quantity' => $product['quantity'],
             );
             $line_items[] = $line_item;
@@ -167,7 +168,7 @@ class UTRUSTRedirectModuleFrontController extends ModuleFrontController
             'reference' => $reference,
             'amount' => array(
                 'total' => strval($order->getOrderTotal(true, 3)),
-                'currency' => 'EUR',
+                'currency' => $currency->iso_code,
                 'details' => array(
                     'subtotal' => strval($order->getOrderTotal(false)),
                     'tax' => strval($order->getOrderTotal(true, 4) - $order->getOrderTotal(false, 4)),
