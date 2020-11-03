@@ -80,12 +80,16 @@ class UTRUSTValidationModuleFrontController extends ModuleFrontController
                     $payment_status = Configuration::get('PS_OS_CANCELED');
                     break;
                 default:
-                    $payment_status = Configuration::get('PS_OS_ERROR');
                     break;
             }
 
         } else {
             $payment_status = Configuration::get('PS_OS_ERROR');
+        }
+
+        # STOP FUNCTION IF EVENT TYPE IS NOT KNOWN
+        if ($payment_status == null) {
+            return;
         }
 
         $mail = false;
