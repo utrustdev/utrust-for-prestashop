@@ -44,7 +44,7 @@ class UTRUST extends PaymentModule
     {
         $this->name = 'UTRUST';
         $this->tab = 'payments_gateways';
-        $this->version = '1.1.0';
+        $this->version = '1.3.0';
         $this->author = 'Utrust Team';
         $this->need_instance = 1;
 
@@ -60,9 +60,43 @@ class UTRUST extends PaymentModule
 
         $this->confirmUninstall = $this->l('');
 
-        // $this->limited_countries = array('FR');
-
-        $this->limited_currencies = array('EUR', 'GBP', 'USD');
+        $this->limited_currencies = array(
+          "USD",
+          "EUR",
+          "GBP",
+          "ARS",
+          "AUD",
+          "BRL",
+          "CAD",
+          "CLP",
+          "CNY",
+          "CZK",
+          "DKK",
+          "DOP",
+          "HKD",
+          "HUF",
+          "INR",
+          "IDR",
+          "ILS",
+          "JPY",
+          "KRW",
+          "MYR",
+          "MXN",
+          "NZD",
+          "NOK",
+          "PKR",
+          "PHP",
+          "PLN",
+          "RON",
+          "RUB",
+          "SGD",
+          "ZAR",
+          "SEK",
+          "CHF",
+          "TWD",
+          "THB",
+          "AED"
+        );
 
         $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
     }
