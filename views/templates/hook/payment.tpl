@@ -1,34 +1,20 @@
-{*
-* 2007-2019 PrestaShop
-*
-* NOTICE OF LICENSE
-*
-* This source file is subject to the Academic Free License (AFL 3.0)
-* that is bundled with this package in the file LICENSE.txt.
-* It is also available through the world-wide-web at this URL:
-* http://opensource.org/licenses/afl-3.0.php
-* If you did not receive a copy of the license and are unable to
-* obtain it through the world-wide-web, please send an email
-* to license@prestashop.com so we can send you a copy immediately.
-*
-* DISCLAIMER
-*
-* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
-* versions in the future. If you wish to customize PrestaShop for your
-* needs please refer to http://www.prestashop.com for more information.
-*
-*  @author    PrestaShop SA <contact@prestashop.com>
-*  @copyright 2007-2019 PrestaShop SA
-*  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
-*  International Registered Trademark & Property of PrestaShop SA
-*}
-
-<div class="row">
-    <div class="col-xs-12">
-		<p class="payment_module">
-			<a class="utrust" href="{$link->getModuleLink('UTRUST', 'redirect', array(), true)|escape:'htmlall':'UTF-8'}" title="{l s='Pay with major cryptocurrencies' mod='UTRUST'}">
-			{l s='Pay with major cryptocurrencies' mod='UTRUST'}
-			</a>
-		</p>
-    </div>
-</div>
+{*
+ * UtrustPayments - A Sample Payment Module for PrestaShop 1.7
+ *
+ * Form to be displayed in the payment step
+ *
+ * @author Andresa Martins <contact@andresa.dev>
+ * @license https://opensource.org/licenses/afl-3.0.php
+ *}
+<form method="post" action="{$action}">
+    <div class="row">
+        <div class="col-xs-12">
+            <p class="payment_module">
+                <span class="text-primary">{l s='You will be redirected to the Utrust payment widget compatible with any major crypto wallets. It will allow you to pay for your purchase in a safe and seamless way using Bitcoin, Ethereum, Tether or a number of other currencies.' mod='utrustpayments'}</span>
+                <u><a class="utrust" href="https://utrust.com/" target="_blank">
+                {l s='What is Utrust?' mod='utrustpayments'}
+                </a></u>
+            </p>
+        </div>
+    </div>
+</form>
