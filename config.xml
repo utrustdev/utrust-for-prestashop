@@ -2,12 +2,11 @@
 <module>
     <name>utrustpayments</name>
     <displayName><![CDATA[Utrust Payments]]></displayName>
-    <version><![CDATA[1.0.0]]></version>
-    <description><![CDATA[Sample Payment module developed for learning purposes.]]></description>
-    <author><![CDATA[TBI]]></author>
+    <version><![CDATA[2.0.0]]></version>
+    <description><![CDATA[Pay with cryptocurrencies]]></description>
+    <author><![CDATA[Utrust]]></author>
     <tab><![CDATA[payments_gateways]]></tab>
-	<confirmUninstall><![CDATA[Are you sure you want to uninstall this module?]]></confirmUninstall>
+	<confirmUninstall><![CDATA[]]></confirmUninstall>
     <is_configurable>1</is_configurable>
     <need_instance>1</need_instance>
-	<limited_countries></limited_countries>
 </module>
