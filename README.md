@@ -12,7 +12,7 @@ Find out more about Utrust at [utrust.com](https://utrust.com).
 ## Requirements
 
 - Utrust Merchant account
-- Online store using PrestaShop v1.6.x (this module doesn't work on 1.7)
+- Online store using PrestaShop v1.7.x
 
 ## Install and Update
 
