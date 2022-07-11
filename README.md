@@ -13,6 +13,7 @@ Find out more about Utrust at [utrust.com](https://utrust.com).
 
 - Utrust Merchant account
 - Online store using PrestaShop v1.7.x
+- If you're still using PrestaShop v1.6.x, download module from [here](https://github.com/utrustdev/utrust-for-prestashop/releases/tag/v1.3.0)
 
 ## Install and Update
 
