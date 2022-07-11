@@ -2,7 +2,7 @@
 
 # Utrust for PrestaShop
 
-**Demo Store:** https://prestashop.store.utrust.com/
+**Demo Store:** https://prestashop17.store.utrust.com/
 
 Accept Bitcoin, Ethereum, Utrust Token and other cryptocurrencies directly on your store with the Utrust payment gateway for PrestaShop.
 Utrust is cryptocurrency agnostic and provides fiat settlements.
