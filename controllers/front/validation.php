@@ -1,37 +1,41 @@
 <?php
+
 /**
- * 2007-2019 PrestaShop
+
+ * UtrustPayments - A Sample Payment Module for PrestaShop 1.7
+
  *
- * NOTICE OF LICENSE
+
+ * Order Validation Controller
+
  *
- * This source file is subject to the Academic Free License (AFL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/afl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@prestashop.com so we can send you a copy immediately.
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
- * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
- *
- *  @author    PrestaShop SA <contact@prestashop.com>
- *  @copyright 2007-2019 PrestaShop SA
- *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
- *  International Registered Trademark & Property of PrestaShop SA
+
+ * @author Andresa Martins <contact@andresa.dev>
+
+ * @license https://opensource.org/licenses/afl-3.0.php
+
  */
-class UTRUSTValidationModuleFrontController extends ModuleFrontController
+
+
+
+class UtrustpaymentsValidationModuleFrontController extends ModuleFrontController
+
 {
+
     /**
+
      * This class should be use by your Instant Payment
+
      * Notification system to validate the order remotely
+
      */
+
     public function postProcess()
+
     {
 
+
+        // ini_set('max_execution_time', '13000');
         /*
          * If the module is not active anymore, no need to process anything.
          */
@@ -45,7 +49,9 @@ class UTRUSTValidationModuleFrontController extends ModuleFrontController
 
         $request_body = file_get_contents('php://input');
 
-        // $request_body = "{\"event_type\":\"ORDER.PAYMENT.RECEIVED\",\"resource\":{\"reference\":\"25\"}}";
+        // $request_body = "{\"event_type\":\"ORDER.PAYMENT.RECEIVED\",\"resource\":{\"reference\":\"62\"}, \"signature\": \"e464ee00e355c72eb3d196d9e1a1c36de68cd8bd0da68464c5862477603ec2b7\", \"state\": \"detected\"}";
+
+
 
         $notification = json_decode($request_body);
         /* error_log("---");
@@ -58,8 +64,9 @@ class UTRUSTValidationModuleFrontController extends ModuleFrontController
             return;
         }
 
-        $order_id = $notification->resource->reference;
 
+
+        $order_id = $notification->resource->reference;
         $sql = 'SELECT * FROM ' . _DB_PREFIX_ . 'UTRUST WHERE id_order = ' . $order_id;
 
         $results = Db::getInstance()->executeS($sql);
@@ -71,6 +78,8 @@ class UTRUSTValidationModuleFrontController extends ModuleFrontController
             return true;
         }
 
+
+
         if ($this->isValidOrder($request_body) === true) {
             switch ($notification->event_type) {
                 case 'ORDER.PAYMENT.RECEIVED':
@@ -80,6 +89,7 @@ class UTRUSTValidationModuleFrontController extends ModuleFrontController
                     $payment_status = Configuration::get('PS_OS_CANCELED');
                     break;
                 default:
+                    $payment_status = null;
                     break;
             }
 
@@ -89,6 +99,8 @@ class UTRUSTValidationModuleFrontController extends ModuleFrontController
 
         # STOP FUNCTION IF EVENT TYPE IS NOT KNOWN
         if ($payment_status == null) {
+            echo 1;
+            die();
             return;
         }
 
@@ -97,50 +109,127 @@ class UTRUSTValidationModuleFrontController extends ModuleFrontController
 
         if ($payment_status == Configuration::get('PS_OS_PAYMENT')) {
             $mail = true;
-            $objOrder->addOrderPayment($notification->resource->amount, null, $results[0]["UUID"]);
+            // $res = Db::getInstance()->getValue('
+            //     SELECT transaction_id
+            //     FROM `' . _DB_PREFIX_ . 'order_payment`
+            //     WHERE order_reference = "' . $objOrder->reference . '"
+            //     AND transaction_id != ""');
+            // if (!$res) {
+            // }
+
+            // $objOrder->addOrderPayment($notification->resource->amount, null, $results[0]["UUID"]);
+            // $orderPaymentDatas = OrderPayment::getByOrderId($order_id);
+            // if(!empty($orderPaymentDatas)){
+            //     $orderPayment = new OrderPayment($orderPaymentDatas[0]->id);
+            //     $orderPayment->transaction_id = $results[0]["UUID"];
+            //     $orderPayment->save();
+            // }
+
         }
 
         $history = new OrderHistory();
         $history->id_order = (int) $objOrder->id;
         $history->changeIdOrderState($payment_status, (int) ($objOrder->id));
         $history->addWithemail($mail);
+        echo $history->save();
 
-        return $history->save();
+
+        // sleep(20);
+        // Db::getInstance()->getValue('
+        //     DELETE
+        //     FROM `' . _DB_PREFIX_ . 'order_payment`
+        //     WHERE order_reference = "' . $objOrder->reference . '"
+        //     AND transaction_id != ""');
+
+
+        Db::getInstance()->getValue('
+            UPDATE
+            `' . _DB_PREFIX_ . 'order_payment`
+            SET transaction_id = "' .$results[0]["UUID"] . '"
+            WHERE order_reference = "'.$objOrder->reference.'"');
+
+
+        // $orderPaymentDatas = OrderPayment::getByOrderId($order_id);
+        // Db::getInstance()->getValue('
+        //     UPDATE
+        //      `' . _DB_PREFIX_ . 'order_invoice_payment`
+        //     WHERE id_order_payment = "' . $orderPaymentDatas[0]->id . '"
+        //      WHERE id_order="'.$objOrder->id).'"');
+         // echo 1;
+        die();
+
     }
+
+
 
     protected function isValidOrder($request_body)
+
     {
+
         $notification = json_decode($request_body);
+
         // get secret from Utrust settings
+
         $webhook_secret = Configuration::get('UTRUST_WEBHOOK_SECRET');
 
+
+
         // get signature from response
+
         $signature_from_response = $notification->signature;
 
+
+
         // removes signature from response
+
         unset($notification->signature);
 
+
+
         // concat keys and values into one string
+
         $concated_payload = array();
+
         foreach ($notification as $key => $value) {
+
             if (is_object($value)) {
+
                 foreach ($value as $k => $v) {
+
                     $concated_payload[] = $key;
+
                     $concated_payload[] = $k . $v;
+
                 }
+
             } else {
+
                 $concated_payload[] = $key . $value;
+
             }
+
         }
+
         $concated_payload = join('', $concated_payload);
 
+
+
         // sign string with HMAC SHA256
+
         $signed_payload = hash_hmac('sha256', $concated_payload, $webhook_secret);
 
+
+
         // check if signature is correct
+
         if ($signature_from_response === $signed_payload) {
+
             return true;
+
         }
+
         return false;
+
     }
+
 }
